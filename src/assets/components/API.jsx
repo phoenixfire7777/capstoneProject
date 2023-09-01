@@ -4,8 +4,9 @@ const API_URL = 'https://fakestoreapi.com'
 export async function fetchAllProducts() {
     try {
         const response = await fetch(`${API_URL}/products`)
-            .then(res => res.json())
-            .then(json => console.log(json))
+            const result =await response.json();
+           
+            return result
     } catch (err) {
         console.error(err);
     }

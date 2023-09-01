@@ -13,7 +13,9 @@ function App() {
 
   return (
     <>
+      <>
       <NavBar />
+      </>
       <Routes>
         <Route path ='/' element={<ViewAllProducts />} />
         <Route path ='/authenticate' element={<Authenticate />} />
