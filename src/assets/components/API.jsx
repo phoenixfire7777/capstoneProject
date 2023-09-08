@@ -11,3 +11,14 @@ export async function fetchAllProducts() {
         console.error(err);
     }
 }
+
+export async function fetchProduct(id) {
+    try {
+        const response = await fetch(`${API_URL}/products/${id}`)
+            const result =await response.json();
+           console.log(result)
+            return result
+    } catch (err) {
+        console.error(err);
+    }
+}
