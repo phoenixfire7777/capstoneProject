@@ -2,12 +2,15 @@ import { useState, useEffect } from "react"
 import { fetchAllProducts } from "../components/API"
 import ProductCard from "../components/ProductCard"
 
+
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 //this page allows user to view all products
-export default function ViewAllProducts() {
-    const [products, setProducts] = useState([])
+export default function ViewAllProducts({products, setProducts, cart, setCart, addToCart}) {
+    
+    
 
 
     useEffect(() => {
@@ -20,27 +23,26 @@ export default function ViewAllProducts() {
     }, [])
     return (
         <div>
-            <Row xs={2} md={4} className="g-4">
+             
+            <Row xs={'auto'} sm={'auto'} md={'auto'} lg={'auto'} xl={'auto'} xxl={'auto'} className="g-4">
                 {
-                    Array.from({ length: 4 }).map((_, idx) => (
+                    Array.from({ length: 1 }).map((_, idx) => (
 
 
-                        products.map((product) => {
-                            const { id, title, price, category, description, image } = product
+                        products.map((product, index) => {
+                            
                             return (
-                                <Col key={idx}>
+                                <Col key={index}>
                                     <ProductCard
-                                        key={id}
-                                        id={id}
-                                        title={title}
-                                        price={price}
-                                        category={category}
-                                        description={description}
-                                        image={image}
+                                        key={product.id}
+                                        product={product}
+                                        cart={cart}
+                                        setCart={setCart}
                                         isActive={true}
-                                        
-                                        
-                                        
+                                        addToCart={addToCart}
+
+
+
                                     />
 
                                 </Col>

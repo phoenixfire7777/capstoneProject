@@ -5,8 +5,9 @@ import ProductCard from "../components/ProductCard";
 import { fetchProduct } from "../components/API";
 
 // this page shows the details of one product from ViewAllProducts page
-export default function SingleProduct() {
+export default function SingleProduct({cart, setCart, addToCart}) {
     const { id } = useParams()
+    console.log(id)
     const [product, setProduct] = useState({})
     useEffect(() => {
         async function fetchData() {
@@ -22,12 +23,11 @@ export default function SingleProduct() {
     return (
         <div>
             <ProductCard
-                title={product.title}
-                price={product.price}
-                category={product.category}
-                description={product.description}
-                image={product.image}
+                product={product}
+                cart={cart}
+                setCart={setCart}
                 isActive={false}
+                addToCart={addToCart}
             />
         </div>
     )
