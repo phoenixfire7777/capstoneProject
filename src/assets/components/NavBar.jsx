@@ -7,10 +7,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 
-export default function NavBar({searchProducts, setSearchProducts, cart}){
-  console.log(searchProducts)
+export default function NavBar({searchProducts, setSearchProducts, cart, authenticated}){
+  // console.log(searchProducts)
 
-  
+
 
 return (
     <Navbar sticky="top" bg="primary" data-bs-theme="dark">
@@ -18,7 +18,10 @@ return (
           <Navbar.Brand href="/">Shop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/authenticate">Login/SignUp</Nav.Link>
+            {!authenticated
+            ?<Nav.Link href="/authenticate">Login/SignUp</Nav.Link>
+            : <div> </div>
+}
             <Nav.Link href="/cart">Cart {cart.length}</Nav.Link>
             <Nav.Link href="/setting">Settings</Nav.Link>
           </Nav>

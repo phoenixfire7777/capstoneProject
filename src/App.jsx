@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import ViewAllProducts from './assets/pages/ViewAllProducts'
@@ -10,27 +10,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SingleProduct from './assets/pages/SingleProduct'
 import SearchPage from './assets/pages/SearchPage'
 function App() {
-  // const [token, setToken] = useState(localStorage.getItem("token"))
-  // const [authenticated, setAuthenticated] = useState(false)
+  const [token, setToken] = useState(localStorage.getItem("token"))
+  const [authenticated, setAuthenticated] = useState(false)
   const [isActive, setIsActive] = useState(true)
   const [products, setProducts] = useState([])
-  const [cart, setCart] = useState([])
   const [searchProducts, setSearchProducts] = useState()
+  const [cart, setCart] = useState([])
 
   function addToCart(product){
-    const cartItem = {
-        ...product,
-        quantity: 1
+    const ProductExists = cart.find((item) => item.id === product.id)
+    if(ProductExists){
+      setCart(cart.map((item) => item.id===product.id ?
+      {...ProductExists, quantity: ProductExists.quantity + 1}: item)
+      )
     }
-
-    setCart([...cart, cartItem]);
+    else {
+      setCart([...cart, {...product, quantity: 1}])
+    }
+    console.log(ProductExists)
     
 }
 
-
-
-  console.log(products)
-  console.log(cart)
 
   return (
     <>
@@ -39,7 +39,10 @@ function App() {
           cart={cart}
           searchProducts={searchProducts}
           setSearchProducts={setSearchProducts}
-
+          token={token}
+          setToken={setToken}
+          authenticated={authenticated}
+          setAuthenticated={setAuthenticated}
 
         />
       </>
@@ -66,7 +69,10 @@ function App() {
           cart={cart}
           setCart={setCart}
         />} />
-        <Route path='/authenticate' element={<Authenticate />} />
+        <Route path='/authenticate' element={<Authenticate 
+          token={token}
+          setToken={setToken}
+        />} />
         <Route path='/cart' element={<ShoppingCart
           cart={cart}
           setCart={setCart} />}
