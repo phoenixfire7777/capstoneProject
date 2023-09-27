@@ -6,7 +6,22 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
-export default function UserDataForm({setEmail, setUserName, setPassword, setFirstName, setLastName, setCity, setStreet, setNumber, setZipcode, setLat, setLong, setPhone, signUpNewUser}){
+export default function UserDataForm({
+    setEmail, 
+    setUserName, 
+    setPassword, 
+    setFirstName, 
+    setLastName, 
+    setCity, 
+    setStreet, 
+    setNumber, 
+    setZipcode, 
+    setLat, 
+    setLong, 
+    setPhone, 
+    signUpNewUser,
+    setUserLogin
+}){
     const [validated, setValidated] = useState(false);
     
   const handleSubmit = (event) => {
@@ -227,6 +242,7 @@ export default function UserDataForm({setEmail, setUserName, setPassword, setFir
         />
       </Form.Group>
       <Button type="submit" >Submit form</Button>
+      <Button  onClick={() => setUserLogin(false)}>Login</Button>{' '}
     </Form>
     </Container>
   );
