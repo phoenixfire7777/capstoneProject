@@ -20,7 +20,9 @@ export default function UserDataForm({
     setLong, 
     setPhone, 
     signUpNewUser,
-    setUserLogin
+    authenticated,
+    updateUser
+    // setUserLogin
 }){
     const [validated, setValidated] = useState(false);
     
@@ -31,8 +33,13 @@ export default function UserDataForm({
       event.preventDefault();
       event.stopPropagation();
     }
-    setValidated(true);
+    setValidated(false);
+    if(!authenticated){  
     signUpNewUser()
+    }
+    else{
+        updateUser()
+    }
   };
 
   return (
@@ -158,18 +165,6 @@ export default function UserDataForm({
             Please provide a valid city.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom04">
-          <Form.Label>State</Form.Label>
-          <Form.Control 
-          type="text" 
-          placeholder="State" 
-          required 
-          onChange={(e) => setStreet(e.target.value)}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid state.
-          </Form.Control.Feedback>
-        </Form.Group>
         <Form.Group as={Col} md="3" controlId="validationCustom05">
           <Form.Label>Zip</Form.Label>
           <Form.Control 
@@ -242,7 +237,7 @@ export default function UserDataForm({
         />
       </Form.Group>
       <Button type="submit" >Submit form</Button>
-      <Button  onClick={() => setUserLogin(false)}>Login</Button>{' '}
+      {/* <Button  onClick={() => setUserLogin(false)}>Login</Button>{' '} */}
     </Form>
     </Container>
   );

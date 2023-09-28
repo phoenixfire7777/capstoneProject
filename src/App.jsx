@@ -9,6 +9,8 @@ import NavBar from './assets/components/NavBar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SingleProduct from './assets/pages/SingleProduct'
 import SearchPage from './assets/pages/SearchPage'
+
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"))
   const [authenticated, setAuthenticated] = useState(false)
@@ -16,8 +18,16 @@ function App() {
   const [products, setProducts] = useState([])
   const [searchProducts, setSearchProducts] = useState()
   const [cart, setCart] = useState([])
+  
 
-  function addToCart(product){
+  console.log(localStorage.getItem('token'))
+  console.log(token)
+  console.log(cart)
+
+  
+  
+
+  async function addToCart(product){
     const ProductExists = cart.find((item) => item.id === product.id)
     if(ProductExists){
       setCart(cart.map((item) => item.id===product.id ?
@@ -45,6 +55,7 @@ function App() {
           setAuthenticated={setAuthenticated}
 
         />
+        
       </>
       <Routes>
         <Route path='/' element={<ViewAllProducts
@@ -55,6 +66,9 @@ function App() {
           cart={cart}
           setCart={setCart}
           addToCart={addToCart}
+          token={token}
+          authenticated={authenticated}
+          setAuthenticated={setAuthenticated}
         />}
         />
         <Route path='/product/:id' element={<SingleProduct
@@ -72,12 +86,17 @@ function App() {
         <Route path='/authenticate' element={<Authenticate 
           token={token}
           setToken={setToken}
+          setAuthenticated={setAuthenticated}
         />} />
         <Route path='/cart' element={<ShoppingCart
           cart={cart}
           setCart={setCart} />}
         />
-        <Route path='/setting' element={<Settings />} />
+        <Route path='/profile' element={<Settings 
+          token={token}
+          authenticated={authenticated}
+          setAuthenticated={setAuthenticated}
+        />} />
       </Routes>
 
     </>

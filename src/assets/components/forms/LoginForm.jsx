@@ -1,54 +1,67 @@
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import { loginUser } from '../API';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 
-export default function LoginForm({userName, password, setToken, setUserName, setPassword, setUserLogin}){
 
-    const logInUser = async (e) => {
+
+export default function LoginForm({ userName, password, setUserName, setPassword, setUserLogin, login}) {
+
+
+
+    // const navigate = useNavigate();
+
+    const [validated, setValidated] = useState(false);
+
+   async function handleSubmit(e){
+        const form = e.currentTarget;
         e.preventDefault()
-        try {
-            // Call the loginUser function to perform the login
-            const result = await loginUser(userName, password);
-            console.log(result);
-      
-            // Assuming `result` contains the token
-            const userToken = result;
-            localStorage.setItem('token', userToken);
-            setToken(userToken);
-      
-            // Perform any other actions after successful login
-          } catch (err) {
-            console.error(err);
-          }
-    }
-    return(
-        <>
-                <Form id='loginForm' onSubmit={logInUser}>
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="UserName"
-                        className="mb-3"
-                    >
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        console.log("this is working")
+       
+        setValidated(true);
+        login()
+        
+    };
+
+    return (
+        <Container>
+            <Form noValidate validated={validated} onSubmit={(e) => handleSubmit(e)}>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="4" controlId="validationCustom01">
+                        <Form.Label>username</Form.Label>
                         <Form.Control
-                            type={userName}
+                            required
+                            type="text"
                             placeholder="username"
-                            value={userName}
                             onChange={(e) => setUserName(e.target.value)}
                         />
-                    </FloatingLabel>
-                    <FloatingLabel controlId="floatingPassword" label="Password">
+                        <Form.Control.Feedback type='invalid'>Please enter a username.</Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
+                        <Form.Label>password</Form.Label>
                         <Form.Control
-                            type={password}
+                            required
+                            type="password"
                             placeholder="Password"
-                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                    </FloatingLabel>
-                    <Button type="submit" >Login</Button>
-                    <Button  onClick={() => setUserLogin(true)}>Sign up </Button>{' '}
-                </Form>
-            </>
+                        <Form.Control.Feedback type='invalid'>Please enter a password.</Form.Control.Feedback>
+                    </Form.Group>
+                </Row>
+
+
+                <Button type="submit" >Login</Button>
+                <Button onClick={() => setUserLogin(true)}>Register</Button>{' '}
+            </Form>
+        </Container>
+
+
     )
 }
