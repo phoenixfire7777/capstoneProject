@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 
 export default function ProductCard({ product, isActive, addToCart}) {
-    // const { id, title, price, category, description, image } = product
+    const { id, title, price, category, description, image, rating } = product
 
     // function addToCart(product setCart){
     //     const cartItem = {
@@ -20,21 +20,24 @@ export default function ProductCard({ product, isActive, addToCart}) {
 
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={product.image} />
+            <Card.Img variant="top" src={image} />
             <Card.Body>
-                <Card.Title>Product: {product.title}</Card.Title>
-                <Card.Text>
-                    Description: {product.description}
+                <Card.Title>Product: {title}</Card.Title>
+                {!isActive
+                ?<Card.Text>
+                    Description: {description}
                 </Card.Text>
+                :<div></div>
+                }
             </Card.Body>
             <ListGroup className="list-group-flush">
-                <ListGroup.Item>category: {product.category}</ListGroup.Item>
-
-                <ListGroup.Item>price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>category: {category}</ListGroup.Item>
+                <ListGroup.Item>Rating: {rating.rate}</ListGroup.Item>
+                <ListGroup.Item>price: ${price}</ListGroup.Item>
             </ListGroup>
             {isActive
                 ? <Card.Body>
-                    <Button href={`/product/${product.id}`}>View</Button>
+                    <Button href={`/product/${id}`}>View</Button>
                     <Button onClick={() => addToCart(product)}>Add to Cart</Button>{' '}
                 </Card.Body>
                 : <Card.Body>

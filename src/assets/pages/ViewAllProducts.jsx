@@ -97,7 +97,7 @@ export default function ViewAllProducts({ products, setProducts, cart, setCart, 
                                         setCart={setCart}
                                         isActive={true}
                                         addToCart={addToCart}
-
+                                        
 
 
                                     />

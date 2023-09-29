@@ -43,8 +43,8 @@ export default function SearchPage({cart, setCart}){
                                     <ProductCard
                                         key={product.id}
                                         product={product}
-                                        isActive={true
-                                        }
+                                        isActive={true}
+                                        
 
 
 

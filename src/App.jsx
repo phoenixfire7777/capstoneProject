@@ -18,6 +18,7 @@ function App() {
   const [products, setProducts] = useState([])
   const [searchProducts, setSearchProducts] = useState()
   const [cart, setCart] = useState([])
+  const [cartCount, setCartCount] = useState(0)
   
 
   console.log(localStorage.getItem('token'))
@@ -27,15 +28,17 @@ function App() {
   
   
 
-  async function addToCart(product){
+  function addToCart(product){
     const ProductExists = cart.find((item) => item.id === product.id)
     if(ProductExists){
       setCart(cart.map((item) => item.id===product.id ?
       {...ProductExists, quantity: ProductExists.quantity + 1}: item)
       )
+      setCartCount(cartCount + 1)
     }
     else {
       setCart([...cart, {...product, quantity: 1}])
+      setCartCount(cartCount + 1)
     }
     console.log(ProductExists)
     
@@ -53,6 +56,7 @@ function App() {
           setToken={setToken}
           authenticated={authenticated}
           setAuthenticated={setAuthenticated}
+          cartCount={cartCount}
 
         />
         

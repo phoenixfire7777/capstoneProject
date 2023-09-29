@@ -6,10 +6,12 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from "react-router-dom";
+import { useState } from 'react';
 
-
-export default function NavBar({ cart, searchProducts, setSearchProducts, token, setToken, authenticated, setAuthenticated, }) {
+export default function NavBar({ cart, searchProducts, setSearchProducts, token, setToken, authenticated, setAuthenticated, cartCount}) {
   // console.log(searchProducts)
+ 
   function logout(){
     localStorage.clear()
         setToken(null)
@@ -19,23 +21,30 @@ export default function NavBar({ cart, searchProducts, setSearchProducts, token,
 
   return (
     <Navbar sticky="top" bg="primary" data-bs-theme="dark">
+
       <Container>
         <Navbar.Brand href="/">Shop</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="/">Home</Nav.Link>
+          {/* <Nav.Link href="/">Home</Nav.Link> */}
+          <Link to="/">Home</Link>
           {!authenticated
-            ? <Nav.Link href="/authenticate">Login/SignUp</Nav.Link>
+            // ? <Nav.Link href="/authenticate">Login/SignUp</Nav.Link>
+            ?<Link to="/authenticate">Login/Signup</Link>
+
             :<Dropdown >
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Settings
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="/profile">Profile</Dropdown.Item> 
+              <Dropdown.Item><Link to="/profile">Profile</Link>
+</Dropdown.Item> 
               <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           }
-          <Nav.Link href="/cart">Cart {cart.length}</Nav.Link>
+          {/* <Nav.Link href="/cart">Cart {cart.length}</Nav.Link> */}
+          <Link to="/cart">Cart {cartCount}</Link>
+
           
         </Nav>
         <Form inline="true">
