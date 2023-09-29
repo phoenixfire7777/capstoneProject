@@ -8,14 +8,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export default function NavBar({ cart, searchProducts, setSearchProducts, token, setToken, authenticated, setAuthenticated, cartCount}) {
   // console.log(searchProducts)
- 
+ const navigate = useNavigate();
   function logout(){
     localStorage.clear()
         setToken(null)
         setAuthenticated(false)
+        navigate("/")
+
   }
 
 
