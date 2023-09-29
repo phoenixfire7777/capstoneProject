@@ -50,6 +50,7 @@ function App() {
       <>
         <NavBar
           cart={cart}
+          setCart={setCart}
           searchProducts={searchProducts}
           setSearchProducts={setSearchProducts}
           token={token}

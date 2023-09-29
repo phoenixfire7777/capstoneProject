@@ -6,7 +6,11 @@ import { Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 
 //This page displays users items in their cart.
-export default function ShoppingCart({ cart }) {
+export default function ShoppingCart({ cart, setCart }) {
+    //this subtracts from the cart
+    function subtractProduct(){
+
+    }
 
     console.log(cart)
 
@@ -42,9 +46,9 @@ export default function ShoppingCart({ cart }) {
                                     </Figure>
                                     </td>
                                     <td>
+                                        <Button onClick={()=> subtractProduct()}>-</Button>
                                         {item.quantity}
-                                        <Button>-</Button>
-                                        <Button>+</Button>
+                                        <Button onClick={() => addProduct()}>+</Button>
                                     </td>
                                     <td>{item.price}</td>
                                     <td>{item.quantity * item.price}</td>

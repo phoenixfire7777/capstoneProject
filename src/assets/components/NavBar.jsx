@@ -26,13 +26,13 @@ export default function NavBar({ cart, searchProducts, setSearchProducts, token,
         <Navbar.Brand href="/">Shop</Navbar.Brand>
         <Nav className="me-auto">
           {/* <Nav.Link href="/">Home</Nav.Link> */}
-          <Link to="/">Home</Link>
+          <Button variant="primary"><Link to="/"><strong>Home</strong></Link></ Button>
           {!authenticated
             // ? <Nav.Link href="/authenticate">Login/SignUp</Nav.Link>
-            ?<Link to="/authenticate">Login/Signup</Link>
+            ?<Button variant="primary"><Link to="/authenticate"><strong>Login/Signup</strong></Link></Button>
 
             :<Dropdown >
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
               Settings
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -43,7 +43,7 @@ export default function NavBar({ cart, searchProducts, setSearchProducts, token,
           </Dropdown>
           }
           {/* <Nav.Link href="/cart">Cart {cart.length}</Nav.Link> */}
-          <Link to="/cart">Cart {cartCount}</Link>
+          <Button variant="primary"><Link to="/cart"><strong>Cart{cartCount}</strong> </Link></Button>
 
           
         </Nav>
@@ -61,7 +61,7 @@ export default function NavBar({ cart, searchProducts, setSearchProducts, token,
               />
             </Col>
             <Col xs="auto">
-              <Button type="submit" href={`/search/${searchProducts}`} variant="light">🔍</Button>
+              <Button variant="light"><Link to={`/search/${searchProducts}`}>🔍</Link></Button>
             </Col>
           </Row>
         </Form>
